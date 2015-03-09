@@ -23,20 +23,11 @@
   1. [Semicolons](#semicolons)
   1. [Type Casting & Coercion](#type-casting--coercion)
   1. [Naming Conventions](#naming-conventions)
-  1. [Accessors](#accessors)
   1. [Constructors](#constructors)
   1. [Events](#events)
-  1. [Modules](#modules)
-  1. [jQuery](#jquery)
-  1. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
-  1. [Testing](#testing)
   1. [Performance](#performance)
   1. [Resources](#resources)
-  1. [In the Wild](#in-the-wild)
-  1. [Translation](#translation)
-  1. [The JavaScript Style Guide Guide](#the-javascript-style-guide-guide)
-  1. [Chat With Us About Javascript](#chat-with-us-about-javascript)
-  1. [Contributors](#contributors)
+  1. [Changelog](#changelog)
   1. [License](#license)
 
 ## Types
@@ -91,13 +82,13 @@
     ```javascript
     // bad
     var superman = {
-      default: { clark: 'kent' },
+      default: { clark: "kent" },
       private: true
     };
 
     // good
     var superman = {
-      defaults: { clark: 'kent' },
+      defaults: { clark: "kent" },
       hidden: true
     };
     ```
@@ -107,17 +98,17 @@
     ```javascript
     // bad
     var superman = {
-      class: 'alien'
+      class: "alien"
     };
 
     // bad
     var superman = {
-      klass: 'alien'
+      klass: "alien"
     };
 
     // good
     var superman = {
-      type: 'alien'
+      type: "alien"
     };
     ```
 
@@ -142,10 +133,10 @@
 
 
     // bad
-    someStack[someStack.length] = 'abracadabra';
+    someStack[someStack.length] = "abracadabra";
 
     // good
-    someStack.push('abracadabra');
+    someStack.push("abracadabra");
     ```
 
   - When you need to copy an array use Array#slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
@@ -178,19 +169,19 @@
 
 ## Strings
 
-  - Use single quotes `''` for strings.
+  - Use double quotes `""` for strings.
 
     ```javascript
-    // bad
+    // good
     var name = "Bob Parr";
 
-    // good
+    // bad
     var name = 'Bob Parr';
 
-    // bad
+    // good
     var fullName = "Bob " + this.lastName;
 
-    // good
+    // bad
     var fullName = 'Bob ' + this.lastName;
     ```
 
@@ -199,62 +190,18 @@
 
     ```javascript
     // bad
-    var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+    var errorMessage = "This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.";
 
     // bad
-    var errorMessage = 'This is a super long error that was thrown because \
+    var errorMessage = "This is a super long error that was thrown because \
     of Batman. When you stop to think about how Batman had anything to do \
     with this, you would get nowhere \
-    fast.';
+    fast.";
 
     // good
-    var errorMessage = 'This is a super long error that was thrown because ' +
-      'of Batman. When you stop to think about how Batman had anything to do ' +
-      'with this, you would get nowhere fast.';
-    ```
-
-  - When programmatically building up a string, use Array#join instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
-
-    ```javascript
-    var items;
-    var messages;
-    var length;
-    var i;
-
-    messages = [{
-      state: 'success',
-      message: 'This one worked.'
-    }, {
-      state: 'success',
-      message: 'This one worked as well.'
-    }, {
-      state: 'error',
-      message: 'This one did not work.'
-    }];
-
-    length = messages.length;
-
-    // bad
-    function inbox(messages) {
-      items = '<ul>';
-
-      for (i = 0; i < length; i++) {
-        items += '<li>' + messages[i].message + '</li>';
-      }
-
-      return items + '</ul>';
-    }
-
-    // good
-    function inbox(messages) {
-      items = [];
-
-      for (i = 0; i < length; i++) {
-        items[i] = messages[i].message;
-      }
-
-      return '<ul><li>' + items.join('</li><li>') + '</li></ul>';
-    }
+    var errorMessage = "This is a super long error that was thrown because " +
+      "of Batman. When you stop to think about how Batman had anything to do " +
+      "with this, you would get nowhere fast.";
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -277,18 +224,17 @@
 
     // immediately-invoked function expression (IIFE)
     (function() {
-      console.log('Welcome to the Internet. Please follow me.');
+      console.log("Welcome to the Internet. Please follow me.");
     })();
     ```
 
   - Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears.
-  - **Note:** ECMA-262 defines a `block` as a list of statements. A function declaration is not a statement. [Read ECMA-262's note on this issue](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
 
     ```javascript
     // bad
     if (currentUser) {
       function test() {
-        console.log('Nope.');
+        console.log("Nope.");
       }
     }
 
@@ -296,7 +242,7 @@
     var test;
     if (currentUser) {
       test = function test() {
-        console.log('Yup.');
+        console.log("Yup.");
       };
     }
     ```
@@ -330,7 +276,7 @@
     };
 
     // bad
-    var isJedi = luke['jedi'];
+    var isJedi = luke["jedi"];
 
     // good
     var isJedi = luke.jedi;
@@ -348,7 +294,7 @@
       return luke[prop];
     }
 
-    var isJedi = getProp('jedi');
+    var isJedi = getProp("jedi");
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -366,24 +312,74 @@
     var superPower = new SuperPower();
     ```
 
-  - Use one `var` declaration per variable.
-    It's easier to add new variable declarations this way, and you never have
-    to worry about swapping out a `;` for a `,` or introducing punctuation-only
-    diffs.
+  - Assign variables at the top of their scope. This helps avoid issues with variable declaration and assignment hoisting related issues.
 
     ```javascript
     // bad
+    function() {
+      test();
+      console.log("doing stuff..");
+
+      //..other stuff..
+
+      var name = getName();
+
+      if (name === "test") {
+        return false;
+      }
+
+      return name;
+    }
+
+    // good
+    function() {
+      var name = getName();
+
+      test();
+      console.log("doing stuff..");
+
+      //..other stuff..
+
+      if (name === "test") {
+        return false;
+      }
+
+      return name;
+    }
+
+    // bad
+    function() {
+      var name = getName();
+
+      if (!arguments.length) {
+        return false;
+      }
+
+      return true;
+    }
+
+    // good
+    function() {
+      if (!arguments.length) {
+        return false;
+      }
+
+      var name = getName();
+
+      return true;
+    }
+    ```
+
+  - Use one `var` declaration for all variables.
+    This promotes the declaration of all variables at the top of the scope, to avoid hoisting confusion.
+
+    ```javascript
+    // good
     var items = getItems(),
         goSportsTeam = true,
         dragonball = 'z';
 
     // bad
-    // (compare to above, and try to spot the mistake)
-    var items = getItems(),
-        goSportsTeam = true;
-        dragonball = 'z';
-
-    // good
     var items = getItems();
     var goSportsTeam = true;
     var dragonball = 'z';
@@ -397,77 +393,12 @@
         items = getItems(),
         goSportsTeam = true;
 
-    // bad
-    var i;
-    var items = getItems();
-    var dragonball;
-    var goSportsTeam = true;
-    var len;
-
     // good
-    var items = getItems();
-    var goSportsTeam = true;
-    var dragonball;
-    var length;
-    var i;
-    ```
-
-  - Assign variables at the top of their scope. This helps avoid issues with variable declaration and assignment hoisting related issues.
-
-    ```javascript
-    // bad
-    function() {
-      test();
-      console.log('doing stuff..');
-
-      //..other stuff..
-
-      var name = getName();
-
-      if (name === 'test') {
-        return false;
-      }
-
-      return name;
-    }
-
-    // good
-    function() {
-      var name = getName();
-
-      test();
-      console.log('doing stuff..');
-
-      //..other stuff..
-
-      if (name === 'test') {
-        return false;
-      }
-
-      return name;
-    }
-
-    // bad
-    function() {
-      var name = getName();
-
-      if (!arguments.length) {
-        return false;
-      }
-
-      return true;
-    }
-
-    // good
-    function() {
-      if (!arguments.length) {
-        return false;
-      }
-
-      var name = getName();
-
-      return true;
-    }
+    var items = getItems(),
+        goSportsTeam = true,
+        dragonball,
+        length,
+        i;
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -512,7 +443,7 @@
       anonymous(); // => TypeError anonymous is not a function
 
       var anonymous = function() {
-        console.log('anonymous function expression');
+        console.log("anonymous function expression");
       };
     }
     ```
@@ -528,7 +459,7 @@
       superPower(); // => ReferenceError superPower is not defined
 
       var named = function superPower() {
-        console.log('Flying');
+        console.log("Flying");
       };
     }
 
@@ -540,7 +471,7 @@
       named(); // => TypeError named is not a function
 
       var named = function named() {
-        console.log('named');
+        console.log("named");
       }
     }
     ```
@@ -552,7 +483,7 @@
       superPower(); // => Flying
 
       function superPower() {
-        console.log('Flying');
+        console.log("Flying");
       }
     }
     ```
@@ -573,7 +504,7 @@
     + **Null** evaluates to **false**
     + **Booleans** evaluate to **the value of the boolean**
     + **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
-    + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
+    + **Strings** evaluate to **false** if an empty string `""`, otherwise **true**
 
     ```javascript
     if ([0]) {
@@ -586,7 +517,7 @@
 
     ```javascript
     // bad
-    if (name !== '') {
+    if (name !== "") {
       // ...stuff...
     }
 
@@ -640,178 +571,22 @@
 **[⬆ back to top](#table-of-contents)**
 
 
-## Comments
-
-  - Use `/** ... */` for multiline comments. Include a description, specify types and values for all parameters and return values.
-
-    ```javascript
-    // bad
-    // make() returns a new element
-    // based on the passed in tag name
-    //
-    // @param {String} tag
-    // @return {Element} element
-    function make(tag) {
-
-      // ...stuff...
-
-      return element;
-    }
-
-    // good
-    /**
-     * make() returns a new element
-     * based on the passed in tag name
-     *
-     * @param {String} tag
-     * @return {Element} element
-     */
-    function make(tag) {
-
-      // ...stuff...
-
-      return element;
-    }
-    ```
-
-  - Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment.
-
-    ```javascript
-    // bad
-    var active = true;  // is current tab
-
-    // good
-    // is current tab
-    var active = true;
-
-    // bad
-    function getType() {
-      console.log('fetching type...');
-      // set the default type to 'no type'
-      var type = this._type || 'no type';
-
-      return type;
-    }
-
-    // good
-    function getType() {
-      console.log('fetching type...');
-
-      // set the default type to 'no type'
-      var type = this._type || 'no type';
-
-      return type;
-    }
-    ```
-
-  - Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME -- need to figure this out` or `TODO -- need to implement`.
-
-  - Use `// FIXME:` to annotate problems.
-
-    ```javascript
-    function Calculator() {
-
-      // FIXME: shouldn't use a global here
-      total = 0;
-
-      return this;
-    }
-    ```
-
-  - Use `// TODO:` to annotate solutions to problems.
-
-    ```javascript
-    function Calculator() {
-
-      // TODO: total should be configurable by an options param
-      this.total = 0;
-
-      return this;
-    }
-  ```
-
-**[⬆ back to top](#table-of-contents)**
-
-
 ## Whitespace
 
-  - Use soft tabs set to 2 spaces.
+  - Use the code formatting in Visual Studio (ctrl + E + D)
+
+  - Use soft tabs set to 4 spaces.
 
     ```javascript
-    // bad
+    // good
     function() {
     ∙∙∙∙var name;
     }
 
     // bad
     function() {
-    ∙var name;
-    }
-
-    // good
-    function() {
     ∙∙var name;
     }
-    ```
-
-  - Place 1 space before the leading brace.
-
-    ```javascript
-    // bad
-    function test(){
-      console.log('test');
-    }
-
-    // good
-    function test() {
-      console.log('test');
-    }
-
-    // bad
-    dog.set('attr',{
-      age: '1 year',
-      breed: 'Bernese Mountain Dog'
-    });
-
-    // good
-    dog.set('attr', {
-      age: '1 year',
-      breed: 'Bernese Mountain Dog'
-    });
-    ```
-
-  - Set off operators with spaces.
-
-    ```javascript
-    // bad
-    var x=y+5;
-
-    // good
-    var x = y + 5;
-    ```
-
-  - End files with a single newline character.
-
-    ```javascript
-    // bad
-    (function(global) {
-      // ...stuff...
-    })(this);
-    ```
-
-    ```javascript
-    // bad
-    (function(global) {
-      // ...stuff...
-    })(this);↵
-    ↵
-    ```
-
-    ```javascript
-    // good
-    (function(global) {
-      // ...stuff...
-    })(this);↵
     ```
 
   - Use indentation when making long method chains. Use a leading dot, which
@@ -819,78 +594,24 @@
 
     ```javascript
     // bad
-    $('#items').find('.selected').highlight().end().find('.open').updateCount();
+    $("#items").find(".selected").highlight().end().find(".open").updateCount();
 
     // bad
-    $('#items').
-      find('selected').
+    $("#items").
+      find("selected").
         highlight().
         end().
-      find('.open').
+      find(".open").
         updateCount();
 
     // good
-    $('#items')
-      .find('.selected')
+    $("#items")
+      .find(".selected")
         .highlight()
         .end()
-      .find('.open')
+      .find(".open")
         .updateCount();
-
-    // bad
-    var leds = stage.selectAll('.led').data(data).enter().append('svg:svg').class('led', true)
-        .attr('width',  (radius + margin) * 2).append('svg:g')
-        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
-        .call(tron.led);
-
-    // good
-    var leds = stage.selectAll('.led')
-        .data(data)
-      .enter().append('svg:svg')
-        .class('led', true)
-        .attr('width',  (radius + margin) * 2)
-      .append('svg:g')
-        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
-        .call(tron.led);
     ```
-
-  - Leave a blank line after blocks and before the next statement
-
-    ```javascript
-    // bad
-    if (foo) {
-      return bar;
-    }
-    return baz;
-
-    // good
-    if (foo) {
-      return bar;
-    }
-
-    return baz;
-
-    // bad
-    var obj = {
-      foo: function() {
-      },
-      bar: function() {
-      }
-    };
-    return obj;
-
-    // good
-    var obj = {
-      foo: function() {
-      },
-
-      bar: function() {
-      }
-    };
-
-    return obj;
-    ```
-
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -912,22 +633,6 @@
       upon,
       aTime
     ];
-
-    // bad
-    var hero = {
-        firstName: 'Bob'
-      , lastName: 'Parr'
-      , heroName: 'Mr. Incredible'
-      , superPower: 'strength'
-    };
-
-    // good
-    var hero = {
-      firstName: 'Bob',
-      lastName: 'Parr',
-      heroName: 'Mr. Incredible',
-      superPower: 'strength'
-    };
     ```
 
   - Additional trailing comma: **Nope.** This can cause problems with IE6/7 and IE9 if it's in quirksmode. Also, in some implementations of ES3 would add length to an array if it had an additional trailing comma. This was clarified in ES5 ([source](http://es5.github.io/#D)):
@@ -937,24 +642,24 @@
     ```javascript
     // bad
     var hero = {
-      firstName: 'Kevin',
-      lastName: 'Flynn',
+      firstName: "Kevin",
+      lastName: "Flynn",
     };
 
     var heroes = [
-      'Batman',
-      'Superman',
+      "Batman",
+      "Superman",
     ];
 
     // good
     var hero = {
-      firstName: 'Kevin',
-      lastName: 'Flynn'
+      firstName: "Kevin",
+      lastName: "Flynn"
     };
 
     var heroes = [
-      'Batman',
-      'Superman'
+      "Batman",
+      "Superman"
     ];
     ```
 
@@ -968,19 +673,13 @@
     ```javascript
     // bad
     (function() {
-      var name = 'Skywalker'
+      var name = "Skywalker"
       return name
     })()
 
     // good
     (function() {
-      var name = 'Skywalker';
-      return name;
-    })();
-
-    // good (guards against the function becoming an argument when two files with IIFEs are concatenated)
-    ;(function() {
-      var name = 'Skywalker';
+      var name = "Skywalker";
       return name;
     })();
     ```
@@ -999,22 +698,22 @@
     //  => this.reviewScore = 9;
 
     // bad
-    var totalScore = this.reviewScore + '';
+    var totalScore = this.reviewScore + "";
 
     // good
-    var totalScore = '' + this.reviewScore;
+    var totalScore = "" + this.reviewScore;
 
     // bad
-    var totalScore = '' + this.reviewScore + ' total score';
+    var totalScore = "" + this.reviewScore + " total score";
 
     // good
-    var totalScore = this.reviewScore + ' total score';
+    var totalScore = this.reviewScore + " total score";
     ```
 
   - Use `parseInt` for Numbers and always with a radix for type casting.
 
     ```javascript
-    var inputValue = '4';
+    var inputValue = "4";
 
     // bad
     var val = new Number(inputValue);
@@ -1097,18 +796,18 @@
     var this_is_my_object = {};
     function c() {}
     var u = new user({
-      name: 'Bob Parr'
+      name: "Bob Parr"
     });
 
     // good
     var thisIsMyObject = {};
     function thisIsMyFunction() {}
     var user = new User({
-      name: 'Bob Parr'
+      name: "Bob Parr"
     });
     ```
 
-  - Use PascalCase when naming constructors or classes.
+  - Use PascalCase when naming constructors.
 
     ```javascript
     // bad
@@ -1116,56 +815,10 @@
       this.name = options.name;
     }
 
-    var bad = new user({
-      name: 'nope'
-    });
 
     // good
     function User(options) {
       this.name = options.name;
-    }
-
-    var good = new User({
-      name: 'yup'
-    });
-    ```
-
-  - Use a leading underscore `_` when naming private properties.
-
-    ```javascript
-    // bad
-    this.__firstName__ = 'Panda';
-    this.firstName_ = 'Panda';
-
-    // good
-    this._firstName = 'Panda';
-    ```
-
-  - When saving a reference to `this` use `_this`.
-
-    ```javascript
-    // bad
-    function() {
-      var self = this;
-      return function() {
-        console.log(self);
-      };
-    }
-
-    // bad
-    function() {
-      var that = this;
-      return function() {
-        console.log(that);
-      };
-    }
-
-    // good
-    function() {
-      var _this = this;
-      return function() {
-        console.log(_this);
-      };
     }
     ```
 
@@ -1188,87 +841,33 @@
 **[⬆ back to top](#table-of-contents)**
 
 
-## Accessors
-
-  - Accessor functions for properties are not required.
-  - If you do make accessor functions use getVal() and setVal('hello').
-
-    ```javascript
-    // bad
-    dragon.age();
-
-    // good
-    dragon.getAge();
-
-    // bad
-    dragon.age(25);
-
-    // good
-    dragon.setAge(25);
-    ```
-
-  - If the property is a boolean, use isVal() or hasVal().
-
-    ```javascript
-    // bad
-    if (!dragon.age()) {
-      return false;
-    }
-
-    // good
-    if (!dragon.hasAge()) {
-      return false;
-    }
-    ```
-
-  - It's okay to create get() and set() functions, but be consistent.
-
-    ```javascript
-    function Jedi(options) {
-      options || (options = {});
-      var lightsaber = options.lightsaber || 'blue';
-      this.set('lightsaber', lightsaber);
-    }
-
-    Jedi.prototype.set = function(key, val) {
-      this[key] = val;
-    };
-
-    Jedi.prototype.get = function(key) {
-      return this[key];
-    };
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-
 ## Constructors
 
   - Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you'll overwrite the base!
 
     ```javascript
     function Jedi() {
-      console.log('new jedi');
+      console.log("new jedi");
     }
 
     // bad
     Jedi.prototype = {
       fight: function fight() {
-        console.log('fighting');
+        console.log("fighting");
       },
 
       block: function block() {
-        console.log('blocking');
+        console.log("blocking");
       }
     };
 
     // good
     Jedi.prototype.fight = function fight() {
-      console.log('fighting');
+      console.log("fighting");
     };
 
     Jedi.prototype.block = function block() {
-      console.log('blocking');
+      console.log("blocking");
     };
     ```
 
@@ -1305,25 +904,6 @@
     luke.jump()
       .setHeight(20);
     ```
-
-
-  - It's okay to write a custom toString() method, just make sure it works successfully and causes no side effects.
-
-    ```javascript
-    function Jedi(options) {
-      options || (options = {});
-      this.name = options.name || 'no name';
-    }
-
-    Jedi.prototype.getName = function getName() {
-      return this.name;
-    };
-
-    Jedi.prototype.toString = function toString() {
-      return 'Jedi - ' + this.getName();
-    };
-    ```
-
 **[⬆ back to top](#table-of-contents)**
 
 
@@ -1333,11 +913,11 @@
 
     ```js
     // bad
-    $(this).trigger('listingUpdated', listing.id);
+    $(this).trigger("listingUpdated", listing.id);
 
     ...
 
-    $(this).on('listingUpdated', function(e, listingId) {
+    $(this).on("listingUpdated", function(e, listingId) {
       // do something with listingId
     });
     ```
@@ -1346,130 +926,16 @@
 
     ```js
     // good
-    $(this).trigger('listingUpdated', { listingId : listing.id });
+    $(this).trigger("listingUpdated", { listingId : listing.id });
 
     ...
 
-    $(this).on('listingUpdated', function(e, data) {
+    $(this).on("listingUpdated", function(e, data) {
       // do something with data.listingId
     });
     ```
 
   **[⬆ back to top](#table-of-contents)**
-
-
-## Modules
-
-  - The module should start with a `!`. This ensures that if a malformed module forgets to include a final semicolon there aren't errors in production when the scripts get concatenated. [Explanation](https://github.com/airbnb/javascript/issues/44#issuecomment-13063933)
-  - The file should be named with camelCase, live in a folder with the same name, and match the name of the single export.
-  - Add a method called `noConflict()` that sets the exported module to the previous version and returns this one.
-  - Always declare `'use strict';` at the top of the module.
-
-    ```javascript
-    // fancyInput/fancyInput.js
-
-    !function(global) {
-      'use strict';
-
-      var previousFancyInput = global.FancyInput;
-
-      function FancyInput(options) {
-        this.options = options || {};
-      }
-
-      FancyInput.noConflict = function noConflict() {
-        global.FancyInput = previousFancyInput;
-        return FancyInput;
-      };
-
-      global.FancyInput = FancyInput;
-    }(this);
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-
-## jQuery
-
-  - Prefix jQuery object variables with a `$`.
-
-    ```javascript
-    // bad
-    var sidebar = $('.sidebar');
-
-    // good
-    var $sidebar = $('.sidebar');
-    ```
-
-  - Cache jQuery lookups.
-
-    ```javascript
-    // bad
-    function setSidebar() {
-      $('.sidebar').hide();
-
-      // ...stuff...
-
-      $('.sidebar').css({
-        'background-color': 'pink'
-      });
-    }
-
-    // good
-    function setSidebar() {
-      var $sidebar = $('.sidebar');
-      $sidebar.hide();
-
-      // ...stuff...
-
-      $sidebar.css({
-        'background-color': 'pink'
-      });
-    }
-    ```
-
-  - For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
-  - Use `find` with scoped jQuery object queries.
-
-    ```javascript
-    // bad
-    $('ul', '.sidebar').hide();
-
-    // bad
-    $('.sidebar').find('ul').hide();
-
-    // good
-    $('.sidebar ul').hide();
-
-    // good
-    $('.sidebar > ul').hide();
-
-    // good
-    $sidebar.find('ul').hide();
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-
-## ECMAScript 5 Compatibility
-
-  - Refer to [Kangax](https://twitter.com/kangax/)'s ES5 [compatibility table](http://kangax.github.com/es5-compat-table/).
-
-**[⬆ back to top](#table-of-contents)**
-
-
-## Testing
-
-  - **Yup.**
-
-    ```javascript
-    function() {
-      return true;
-    }
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
 
 ## Performance
 
@@ -1551,82 +1017,9 @@
 
 **[⬆ back to top](#table-of-contents)**
 
-## In the Wild
+## Changelog
 
-  This is a list of organizations that are using this style guide. Send us a pull request or open an issue and we'll add you to the list.
-
-  - **Aan Zee**: [AanZee/javascript](https://github.com/AanZee/javascript)
-  - **Airbnb**: [airbnb/javascript](https://github.com/airbnb/javascript)
-  - **American Insitutes for Research**: [AIRAST/javascript](https://github.com/AIRAST/javascript)
-  - **Apartmint**: [apartmint/javascript](https://github.com/apartmint/javascript)
-  - **Avalara**: [avalara/javascript](https://github.com/avalara/javascript)
-  - **Compass Learning**: [compasslearning/javascript-style-guide](https://github.com/compasslearning/javascript-style-guide)
-  - **DailyMotion**: [dailymotion/javascript](https://github.com/dailymotion/javascript)
-  - **Digitpaint** [digitpaint/javascript](https://github.com/digitpaint/javascript)
-  - **Evernote**: [evernote/javascript-style-guide](https://github.com/evernote/javascript-style-guide)
-  - **ExactTarget**: [ExactTarget/javascript](https://github.com/ExactTarget/javascript)
-  - **Gawker Media**: [gawkermedia/javascript](https://github.com/gawkermedia/javascript)
-  - **GeneralElectric**: [GeneralElectric/javascript](https://github.com/GeneralElectric/javascript)
-  - **GoodData**: [gooddata/gdc-js-style](https://github.com/gooddata/gdc-js-style)
-  - **Grooveshark**: [grooveshark/javascript](https://github.com/grooveshark/javascript)
-  - **How About We**: [howaboutwe/javascript](https://github.com/howaboutwe/javascript)
-  - **InfoJobs**: [InfoJobs/JavaScript-Style-Guide](https://github.com/InfoJobs/JavaScript-Style-Guide)
-  - **Intent Media**: [intentmedia/javascript](https://github.com/intentmedia/javascript)
-  - **Jam3**: [Jam3/Javascript-Code-Conventions](https://github.com/Jam3/Javascript-Code-Conventions)
-  - **Kinetica Solutions**: [kinetica/javascript](https://github.com/kinetica/javascript)
-  - **Mighty Spring**: [mightyspring/javascript](https://github.com/mightyspring/javascript)
-  - **MinnPost**: [MinnPost/javascript](https://github.com/MinnPost/javascript)
-  - **ModCloth**: [modcloth/javascript](https://github.com/modcloth/javascript)
-  - **Money Advice Service**: [moneyadviceservice/javascript](https://github.com/moneyadviceservice/javascript)
-  - **Muber**: [muber/javascript](https://github.com/muber/javascript)
-  - **National Geographic**: [natgeo/javascript](https://github.com/natgeo/javascript)
-  - **National Park Service**: [nationalparkservice/javascript](https://github.com/nationalparkservice/javascript)
-  - **Nimbl3**: [nimbl3/javascript](https://github.com/nimbl3/javascript)
-  - **Orion Health**: [orionhealth/javascript](https://github.com/orionhealth/javascript)
-  - **Peerby**: [Peerby/javascript](https://github.com/Peerby/javascript)
-  - **Razorfish**: [razorfish/javascript-style-guide](https://github.com/razorfish/javascript-style-guide)
-  - **reddit**: [reddit/styleguide/javascript](https://github.com/reddit/styleguide/tree/master/javascript)
-  - **REI**: [reidev/js-style-guide](https://github.com/reidev/js-style-guide)
-  - **Ripple**: [ripple/javascript-style-guide](https://github.com/ripple/javascript-style-guide)
-  - **SeekingAlpha**: [seekingalpha/javascript-style-guide](https://github.com/seekingalpha/javascript-style-guide)
-  - **Shutterfly**: [shutterfly/javascript](https://github.com/shutterfly/javascript)
-  - **StudentSphere**: [studentsphere/javascript](https://github.com/studentsphere/javascript)
-  - **Target**: [target/javascript](https://github.com/target/javascript)
-  - **TheLadders**: [TheLadders/javascript](https://github.com/TheLadders/javascript)
-  - **Userify**: [userify/javascript](https://github.com/userify/javascript)
-  - **VoxFeed**: [VoxFeed/javascript-style-guide](https://github.com/VoxFeed/javascript-style-guide)
-  - **Weggo**: [Weggo/javascript](https://github.com/Weggo/javascript)
-  - **Zillow**: [zillow/javascript](https://github.com/zillow/javascript)
-  - **ZocDoc**: [ZocDoc/javascript](https://github.com/ZocDoc/javascript)
-
-## Translation
-
-  This style guide is also available in other languages:
-
-  - ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **German**: [timofurrer/javascript-style-guide](https://github.com/timofurrer/javascript-style-guide)
-  - ![jp](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japanese**: [mitsuruog/javacript-style-guide](https://github.com/mitsuruog/javacript-style-guide)
-  - ![br](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png) **Brazilian Portuguese**: [armoucar/javascript-style-guide](https://github.com/armoucar/javascript-style-guide)
-  - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese**: [adamlu/javascript-style-guide](https://github.com/adamlu/javascript-style-guide)
-  - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Spanish**: [paolocarrasco/javascript-style-guide](https://github.com/paolocarrasco/javascript-style-guide)
-  - ![kr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Korean**: [tipjs/javascript-style-guide](https://github.com/tipjs/javascript-style-guide)
-  - ![fr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/France.png) **French**: [nmussy/javascript-style-guide](https://github.com/nmussy/javascript-style-guide)
-  - ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russian**: [uprock/javascript](https://github.com/uprock/javascript)
-  - ![bg](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Bulgaria.png) **Bulgarian**: [borislavvv/javascript](https://github.com/borislavvv/javascript)
-  - ![ca](https://raw.githubusercontent.com/fpmweb/javascript-style-guide/master/img/catala.png) **Catalan**: [fpmweb/javascript-style-guide](https://github.com/fpmweb/javascript-style-guide)
-  - ![pl](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Poland.png) **Polish**: [mjurczyk/javascript](https://github.com/mjurczyk/javascript)
-
-## The JavaScript Style Guide Guide
-
-  - [Reference](https://github.com/airbnb/javascript/wiki/The-JavaScript-Style-Guide-Guide)
-
-## Chat With Us About JavaScript
-
-  - Find us on [gitter](https://gitter.im/airbnb/javascript).
-
-## Contributors
-
-  - [View Contributors](https://github.com/airbnb/javascript/graphs/contributors)
-
+ 0.1 Copied Airbnb's styleguide and made basic adjustments. - Oskar
 
 ## License
 
