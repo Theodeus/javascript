@@ -6,6 +6,7 @@
 ## Table of Contents
 
   1. [About](#about)
+  1. [General](#general)
   1. [Types](#types)
   1. [Objects](#objects)
   1. [Arrays](#arrays)
@@ -31,6 +32,9 @@
 
 ## About
   A style guide and best practises for JavaScript development in MPK.
+
+## General
+  - Use JsHint.
 
 ## Types
 
@@ -1020,6 +1024,8 @@
 **[⬆ back to top](#table-of-contents)**
 
 ## Changelog
+ ---
+ 0.3 Added general section - Oskar
  ---
  0.2 Added about section - Oskar
  ---
