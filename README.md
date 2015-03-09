@@ -1022,6 +1022,7 @@
 ## Changelog
 
  0.2 Added about section - Oskar
+ ---
  0.1 Copied Airbnb's styleguide and made basic adjustments. - Oskar
 
 ## License
