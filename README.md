@@ -27,7 +27,6 @@
   1. [Events](#events)
   1. [Performance](#performance)
   1. [Resources](#resources)
-  1. [Changelog](#changelog)
   1. [License](#license)
 
 ## About
@@ -1020,15 +1019,6 @@
   - [nettuts](http://net.tutsplus.com/?s=javascript)
 
 **[⬆ back to top](#table-of-contents)**
-
-## Changelog
- ---
- 0.3 Added general section - Oskar
- ---
- 0.2 Added about section - Oskar
- ---
- 0.1 Copied Airbnb's styleguide and made basic adjustments. - Oskar
- ---
 
 ## License
 
