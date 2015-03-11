@@ -549,7 +549,7 @@
 
 ## Blocks
 
-  - Use braces with all multi-line blocks.
+  - Use braces with line breaks.
 
     ```javascript
     // bad
