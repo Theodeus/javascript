@@ -964,8 +964,8 @@
 **Tools**
 
   - Code Style Linters
-    + [JSHint](http://www.jshint.com/) - [Airbnb Style .jshintrc](https://github.com/airbnb/javascript/blob/master/linters/jshintrc)
-    + [JSCS](https://github.com/jscs-dev/node-jscs) - [Airbnb Style Preset](https://github.com/jscs-dev/node-jscs/blob/master/presets/airbnb.json)
+    + [JSHint for VS2013](http://jslint4vs2010.codeplex.com/) - [MPK Style .xml](https://github.com/Theodeus/javascript/blob/master/linters/mpk.xml)
+    + [JSHint](http://www.jshint.com/) - [MPK Style .jshintrc](https://github.com/Theodeus/javascript/blob/master/linters/jshintrc)
 
 **Other Styleguides**
 
