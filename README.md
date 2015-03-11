@@ -47,8 +47,8 @@
     + `undefined`
 
     ```javascript
-    var foo = 1;
-    var bar = foo;
+    var foo = 1,
+        bar = foo;
 
     bar = 9;
 
@@ -61,8 +61,8 @@
     + `function`
 
     ```javascript
-    var foo = [1, 2];
-    var bar = foo;
+    var foo = [1, 2],
+        bar = foo;
 
     bar[0] = 9;
 
@@ -148,9 +148,9 @@
   - When you need to copy an array use Array#slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
     ```javascript
-    var len = items.length;
-    var itemsCopy = [];
-    var i;
+    var len = items.length,
+        itemsCopy = [],
+        i;
 
     // bad
     for (i = 0; i < len; i++) {
@@ -648,25 +648,23 @@
     ```javascript
     // bad
     var hero = {
-      firstName: "Kevin",
-      lastName: "Flynn",
-    };
-
-    var heroes = [
-      "Batman",
-      "Superman",
-    ];
+          firstName: "Kevin",
+          lastName: "Flynn",
+        },
+        heroes = [
+          "Batman",
+          "Superman",
+        ];
 
     // good
     var hero = {
-      firstName: "Kevin",
-      lastName: "Flynn"
-    };
-
-    var heroes = [
-      "Batman",
-      "Superman"
-    ];
+          firstName: "Kevin",
+          lastName: "Flynn"
+        },
+        heroes = [
+          "Batman",
+          "Superman"
+        ];
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -798,19 +796,19 @@
 
     ```javascript
     // bad
-    var OBJEcttsssss = {};
-    var this_is_my_object = {};
+    var OBJEcttsssss = {},
+        this_is_my_object = {},
+        u = new user({
+          name: "Bob Parr"
+        });
     function c() {}
-    var u = new user({
-      name: "Bob Parr"
-    });
 
     // good
-    var thisIsMyObject = {};
+    var thisIsMyObject = {},
+        user = new User({
+          name: "Bob Parr"
+        });
     function thisIsMyFunction() {}
-    var user = new User({
-      name: "Bob Parr"
-    });
     ```
 
   - Use PascalCase when naming constructors.
