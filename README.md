@@ -174,7 +174,7 @@
 
 ## Strings
 
-  - Use double quotes `''` for strings.
+  - Use single quotes `''` for strings.
 
     ```javascript
     // good
@@ -580,7 +580,7 @@
 
   - Use the code formatting in Visual Studio (ctrl + E + D)
 
-  - Use soft tabs set to 4 spaces.
+  - Use tabs.
 
     ```javascript
     // good
