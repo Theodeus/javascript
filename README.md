@@ -87,13 +87,13 @@
     ```javascript
     // bad
     var superman = {
-      default: { clark: "kent" },
+      default: { clark: 'kent' },
       private: true
     };
 
     // good
     var superman = {
-      defaults: { clark: "kent" },
+      defaults: { clark: 'kent' },
       hidden: true
     };
     ```
@@ -103,17 +103,17 @@
     ```javascript
     // bad
     var superman = {
-      class: "alien"
+      class: 'alien'
     };
 
     // bad
     var superman = {
-      klass: "alien"
+      klass: 'alien'
     };
 
     // good
     var superman = {
-      type: "alien"
+      type: 'alien'
     };
     ```
 
@@ -138,10 +138,10 @@
 
 
     // bad
-    someStack[someStack.length] = "abracadabra";
+    someStack[someStack.length] = 'abracadabra';
 
     // good
-    someStack.push("abracadabra");
+    someStack.push('abracadabra');
     ```
 
   - When you need to copy an array use Array#slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
@@ -174,17 +174,17 @@
 
 ## Strings
 
-  - Use double quotes `""` for strings.
+  - Use double quotes `''` for strings.
 
     ```javascript
     // good
-    var name = "Bob Parr";
+    var name = 'Bob Parr';
 
     // bad
     var name = 'Bob Parr';
 
     // good
-    var fullName = "Bob " + this.lastName;
+    var fullName = 'Bob ' + this.lastName;
 
     // bad
     var fullName = 'Bob ' + this.lastName;
@@ -195,18 +195,18 @@
 
     ```javascript
     // bad
-    var errorMessage = "This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.";
+    var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
     // bad
-    var errorMessage = "This is a super long error that was thrown because \
+    var errorMessage = 'This is a super long error that was thrown because \
     of Batman. When you stop to think about how Batman had anything to do \
     with this, you would get nowhere \
-    fast.";
+    fast.';
 
     // good
-    var errorMessage = "This is a super long error that was thrown because " +
-      "of Batman. When you stop to think about how Batman had anything to do " +
-      "with this, you would get nowhere fast.";
+    var errorMessage = 'This is a super long error that was thrown because ' +
+      'of Batman. When you stop to think about how Batman had anything to do ' +
+      'with this, you would get nowhere fast.';
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -229,7 +229,7 @@
 
     // immediately-invoked function expression (IIFE)
     (function() {
-      console.log("Welcome to the Internet. Please follow me.");
+      console.log('Welcome to the Internet. Please follow me.');
     })();
     ```
 
@@ -239,7 +239,7 @@
     // bad
     if (currentUser) {
       function test() {
-        console.log("Nope.");
+        console.log('Nope.');
       }
     }
 
@@ -247,7 +247,7 @@
     var test;
     if (currentUser) {
       test = function test() {
-        console.log("Yup.");
+        console.log('Yup.');
       };
     }
     ```
@@ -281,7 +281,7 @@
     };
 
     // bad
-    var isJedi = luke["jedi"];
+    var isJedi = luke['jedi'];
 
     // good
     var isJedi = luke.jedi;
@@ -299,7 +299,7 @@
       return luke[prop];
     }
 
-    var isJedi = getProp("jedi");
+    var isJedi = getProp('jedi');
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -323,13 +323,13 @@
     // bad
     function() {
       test();
-      console.log("doing stuff..");
+      console.log('doing stuff..');
 
       //..other stuff..
 
       var name = getName();
 
-      if (name === "test") {
+      if (name === 'test') {
         return false;
       }
 
@@ -341,11 +341,11 @@
       var name = getName();
 
       test();
-      console.log("doing stuff..");
+      console.log('doing stuff..');
 
       //..other stuff..
 
-      if (name === "test") {
+      if (name === 'test') {
         return false;
       }
 
@@ -448,7 +448,7 @@
       anonymous(); // => TypeError anonymous is not a function
 
       var anonymous = function() {
-        console.log("anonymous function expression");
+        console.log('anonymous function expression');
       };
     }
     ```
@@ -464,7 +464,7 @@
       superPower(); // => ReferenceError superPower is not defined
 
       var named = function superPower() {
-        console.log("Flying");
+        console.log('Flying');
       };
     }
 
@@ -476,7 +476,7 @@
       named(); // => TypeError named is not a function
 
       var named = function named() {
-        console.log("named");
+        console.log('named');
       }
     }
     ```
@@ -488,7 +488,7 @@
       superPower(); // => Flying
 
       function superPower() {
-        console.log("Flying");
+        console.log('Flying');
       }
     }
     ```
@@ -509,7 +509,7 @@
     + **Null** evaluates to **false**
     + **Booleans** evaluate to **the value of the boolean**
     + **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
-    + **Strings** evaluate to **false** if an empty string `""`, otherwise **true**
+    + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
 
     ```javascript
     if ([0]) {
@@ -522,7 +522,7 @@
 
     ```javascript
     // bad
-    if (name !== "") {
+    if (name !== '') {
       // ...stuff...
     }
 
@@ -599,22 +599,22 @@
 
     ```javascript
     // bad
-    $("#items").find(".selected").highlight().end().find(".open").updateCount();
+    $('#items').find('.selected').highlight().end().find('.open').updateCount();
 
     // bad
-    $("#items").
-      find("selected").
+    $('#items').
+      find('selected').
         highlight().
         end().
-      find(".open").
+      find('.open').
         updateCount();
 
     // good
-    $("#items")
-      .find(".selected")
+    $('#items')
+      .find('.selected')
         .highlight()
         .end()
-      .find(".open")
+      .find('.open')
         .updateCount();
     ```
 
@@ -647,22 +647,22 @@
     ```javascript
     // bad
     var hero = {
-          firstName: "Kevin",
-          lastName: "Flynn",
+          firstName: 'Kevin',
+          lastName: 'Flynn',
         },
         heroes = [
-          "Batman",
-          "Superman",
+          'Batman',
+          'Superman',
         ];
 
     // good
     var hero = {
-          firstName: "Kevin",
-          lastName: "Flynn"
+          firstName: 'Kevin',
+          lastName: 'Flynn'
         },
         heroes = [
-          "Batman",
-          "Superman"
+          'Batman',
+          'Superman'
         ];
     ```
 
@@ -676,13 +676,13 @@
     ```javascript
     // bad
     (function() {
-      var name = "Skywalker"
+      var name = 'Skywalker'
       return name
     })()
 
     // good
     (function() {
-      var name = "Skywalker";
+      var name = 'Skywalker';
       return name;
     })();
     ```
@@ -701,22 +701,22 @@
     //  => this.reviewScore = 9;
 
     // bad
-    var totalScore = this.reviewScore + "";
+    var totalScore = this.reviewScore + '';
 
     // good
-    var totalScore = "" + this.reviewScore;
+    var totalScore = '' + this.reviewScore;
 
     // bad
-    var totalScore = "" + this.reviewScore + " total score";
+    var totalScore = '' + this.reviewScore + ' total score';
 
     // good
-    var totalScore = this.reviewScore + " total score";
+    var totalScore = this.reviewScore + ' total score';
     ```
 
   - Use `parseInt` for Numbers and always with a radix for type casting.
 
     ```javascript
-    var inputValue = "4";
+    var inputValue = '4';
 
     // bad
     var val = new Number(inputValue);
@@ -798,14 +798,14 @@
     var OBJEcttsssss = {},
         this_is_my_object = {},
         u = new user({
-          name: "Bob Parr"
+          name: 'Bob Parr'
         });
     function c() {}
 
     // good
     var thisIsMyObject = {},
         user = new User({
-          name: "Bob Parr"
+          name: 'Bob Parr'
         });
     function thisIsMyFunction() {}
     ```
@@ -850,27 +850,27 @@
 
     ```javascript
     function Jedi() {
-      console.log("new jedi");
+      console.log('new jedi');
     }
 
     // bad
     Jedi.prototype = {
       fight: function fight() {
-        console.log("fighting");
+        console.log('fighting');
       },
 
       block: function block() {
-        console.log("blocking");
+        console.log('blocking');
       }
     };
 
     // good
     Jedi.prototype.fight = function fight() {
-      console.log("fighting");
+      console.log('fighting');
     };
 
     Jedi.prototype.block = function block() {
-      console.log("blocking");
+      console.log('blocking');
     };
     ```
 
@@ -916,11 +916,11 @@
 
     ```js
     // bad
-    $(this).trigger("listingUpdated", listing.id);
+    $(this).trigger('listingUpdated', listing.id);
 
     ...
 
-    $(this).on("listingUpdated", function(e, listingId) {
+    $(this).on('listingUpdated', function(e, listingId) {
       // do something with listingId
     });
     ```
@@ -929,11 +929,11 @@
 
     ```js
     // good
-    $(this).trigger("listingUpdated", { listingId : listing.id });
+    $(this).trigger('listingUpdated', { listingId : listing.id });
 
     ...
 
-    $(this).on("listingUpdated", function(e, data) {
+    $(this).on('listingUpdated', function(e, data) {
       // do something with data.listingId
     });
     ```
